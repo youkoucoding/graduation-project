@@ -1,45 +1,24 @@
-import { useState } from "react";
-import logo from "./logo.svg";
-import "./App.css";
+import React from "react";
+import tw from "twin.macro";
+import { Button, Logo } from "./components";
 
-function App() {
-  const [count, setCount] = useState(0);
+const styles = {
+  // Move long class sets out of jsx to keep it scannable
+  container: ({ hasBackground }: { hasBackground: boolean }) => [
+    tw`flex flex-col items-center justify-center h-screen`,
+    hasBackground && tw`bg-gradient-to-b from-electric to-ribbon`,
+  ],
+};
 
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>Hello Vite + React!</p>
-        <p>
-          <button type="button" onClick={() => setCount((count) => count + 1)}>
-            count is: {count}
-          </button>
-        </p>
-        <p>
-          Edit <code>App.tsx</code> and save to test HMR updates.
-        </p>
-        <p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-          {" | "}
-          <a
-            className="App-link"
-            href="https://vitejs.dev/guide/features.html"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Vite Docs hello world!
-          </a>
-        </p>
-      </header>
+const App = () => (
+  <div css={styles.container({ hasBackground: true })}>
+    <div tw="flex flex-col justify-center h-full gap-y-5">
+      <Button variant="primary">Submit</Button>
+      <Button variant="secondary">Cancel</Button>
+      <Button isSmall>Close</Button>
     </div>
-  );
-}
+    <Logo />
+  </div>
+);
 
 export default App;
